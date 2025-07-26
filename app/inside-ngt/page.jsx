@@ -34,6 +34,7 @@ import {
   MessageCircle,
 } from 'lucide-react';
 import Header from '@/components/Header';
+import Image from 'next/image';
 
 const InsideNGT = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -117,6 +118,43 @@ const InsideNGT = () => {
     }
   }, [visibleSections]);
 
+  const images = [
+    "/images/inside/event1.jpg", "/images/inside/event2.jpg", "/images/inside/event3.jpg", "/images/inside/event4.jpg",
+    "/images/inside/event5.jpg", "/images/inside/event6.jpg", "/images/inside/event7.jpg", "/images/inside/event8.jpg",
+    "/images/inside/event9.jpg", "/images/inside/event10.jpg", "/images/inside/event11.jpg", "/images/inside/event12.jpg",
+    "/images/inside/event13.jpg", "/images/inside/event14.jpg", "/images/inside/event15.jpg", "/images/inside/event16.jpg"
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [fade, setFade] = useState(true);
+
+  const openModal = (index) => {
+    setCurrentIndex(index);
+    setIsOpen(true);
+    setFade(true);
+  };
+
+  const closeModal = () => setIsOpen(false);
+
+  const nextImage = () => {
+    setFade(false); // start fade-out
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev + 1) % images.length);
+      setFade(true); // fade-in
+    }, 200); // match duration below
+  };
+
+  const prevImage = () => {
+    setFade(false);
+    setTimeout(() => {
+      setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+      setFade(true);
+    }, 200);
+  };
+
+
+
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Header />
@@ -146,10 +184,11 @@ const InsideNGT = () => {
                 <h1 className="text-5xl lg:text-6xl  text-gray-900 leading-tight">
                   Where{" "}
                   <span
-                    key={currentWord}
-                    className={`${words[currentWord].color} transition-all duration-500 inline-block transform`}
+                    // key={currentWord}
+                    className={`text-blue-700 transition-all duration-500 inline-block transform`}
                   >
-                    {words[currentWord].text}
+                    {/* {words[currentWord].text} */}
+                    Precision
                   </span>
                   <br />
                   <span className="text-gray-600">Meets Performance</span>
@@ -276,7 +315,7 @@ const InsideNGT = () => {
               <h2 className="text-4xl lg:text-5xl  text-gray-900">
                 Who We <span className="text-blue-600">Are</span>
               </h2>
-              
+
               <div className="space-y-6 text-lg text-gray-600 leading-relaxed">
                 <p>
                   NGT (NextGen Technologies) is a customer operations company for organizations that refuse to compromise
@@ -315,8 +354,7 @@ const InsideNGT = () => {
       </section>
 
       {/* What Makes NGT Different - Diagonal Layout */}
-      <section className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
-        {/* Background elements */}
+      {/* <section className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/10 rounded-full blur-3xl"></div>
@@ -333,9 +371,7 @@ const InsideNGT = () => {
             </h2>
           </div>
 
-          {/* Staggered layout */}
           <div className="space-y-16">
-            {/* Row 1 */}
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-16">
               <div className="lg:col-start-1 lg:col-end-3 space-y-6">
                 <div className="flex items-start space-x-4">
@@ -362,7 +398,6 @@ const InsideNGT = () => {
               </div>
             </div>
 
-            {/* Row 2 */}
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-16">
               <div className="lg:col-start-1 lg:col-end-2 flex items-center order-2 lg:order-1">
                 <div className="w-full h-64 bg-gradient-to-br from-purple-100 to-purple-50 rounded-3xl flex items-center justify-center">
@@ -389,7 +424,6 @@ const InsideNGT = () => {
               </div>
             </div>
 
-            {/* Continue pattern for remaining items */}
             <div className="grid lg:grid-cols-3 gap-8 lg:gap-16">
               <div className="lg:col-start-1 lg:col-end-3 space-y-6">
                 <div className="flex items-start space-x-4">
@@ -443,10 +477,10 @@ const InsideNGT = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Leadership Section - Side by Side */}
-      <section ref={leadershipRef} id="leadership" className="py-32 bg-white">
+      <section ref={leadershipRef} id="leadership" className="py-32 bg-white -mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center space-x-3 bg-gray-50 rounded-full px-6 py-3 mb-6">
@@ -462,79 +496,118 @@ const InsideNGT = () => {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-1 gap-16">
             {/* CEO */}
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-3xl blur-xl"></div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-3xl blur-xl"></div>
               <div className="relative bg-white rounded-3xl p-8 shadow-xl">
                 <div className="flex items-start space-x-6">
                   <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center text-white text-2xl  flex-shrink-0">
                     FA
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-2xl  text-gray-900 mb-1">Malik Farhan Ahmed</h3>
-                    <p className="text-blue-600 font-semibold mb-4">CEO, NextGen Technologies</p>
+                    <h3 className="text-2xl  text-gray-900 mb-1">Imran Ahmed</h3>
+                    <p className="text-blue-600 font-semibold mb-4">Founder, NextGen Technologies</p>
                     <div className="space-y-4 text-gray-600">
                       <p>
-                        A visionary entrepreneur with a passion for impact at scale, Farhan launched NGT with a single mission:
-                        to create performance-driven operations that deliver real results for clients — and real careers for
-                        thousands.
-                      </p>
-                      <p>
-                        Over 7 years, he transformed a small call center into a multi-city operation with over 700 employees,
-                        spanning pay-per-call marketing, customer service, digital strategy, and intelligent outsourcing.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                        <b>The Visionary Who Saw Tomorrow</b><br />
+                        Malik Imran Ahmed – Founder of NextGen Technologies
 
-            {/* MD */}
-            <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-purple-600/20 to-purple-400/20 rounded-3xl blur-xl"></div>
-              <div className="relative bg-white rounded-3xl p-8 shadow-xl">
-                <div className="flex items-start space-x-6">
-                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-2xl  flex-shrink-0">
-                    ZA
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl  text-gray-900 mb-1">Malik Zeeshan Ahmed</h3>
-                    <p className="text-purple-600 font-semibold mb-4">Managing Director</p>
-                    <div className="space-y-4 text-gray-600">
-                      <p>
-                        Zeeshan brings deep operational expertise and a relentless focus on quality and execution. As MD, he
-                        ensures that NGT stays aligned with its core values — integrity, professionalism, and progress.
                       </p>
                       <p>
-                        His leadership style is grounded in action: coaching teams, refining delivery, and driving continuous
-                        improvement across departments.
+                        In 2006, Imran Ahmed saw beyond trends — he saw a future where technology uplifts people. From a small setup in Rawalpindi, he founded NGT with a powerful belief:
                       </p>
+                      <p>
+                        “<i>Technology should let people shine.</i>”
+
+                      </p>
+                      <p>
+                        He turned outsourcing into opportunity and automation into empowerment.                        </p>
+                      <p>
+                        Though he’s no longer with us, his vision drives NGT — a global, human-first tech company powering millions of conversations and home to the cutting-edge AI agent, Niblo™.</p>
+                      <p>
+                        And as Imran would say: “We’re just getting started.
+                      </p>
+
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            <div className="grid lg:grid-cols-2 gap-6 -mt-10">
+              {/* Founder */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600/20 to-blue-400/20 rounded-3xl blur-xl"></div>
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl flex items-center justify-center text-white text-2xl  flex-shrink-0">
+                      FA
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl  text-gray-900 mb-1">Malik Farhan Ahmed</h3>
+                      <p className="text-blue-600 font-semibold mb-4">CEO, NextGen Technologies</p>
+                      <div className="space-y-4 text-gray-600">
+                        <p>
+                          A visionary entrepreneur with a passion for impact at scale, Farhan launched NGT with a single mission:
+                          to create performance-driven operations that deliver real results for clients — and real careers for
+                          thousands.
+                        </p>
+                        <p>
+                          Over 7 years, he transformed a small call center into a multi-city operation with over 700 employees,
+                          spanning pay-per-call marketing, customer service, digital strategy, and intelligent outsourcing.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* CERO */}
+              <div className="relative">
+                <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 to-purple-400/20 rounded-3xl blur-xl"></div>
+                <div className="relative bg-white rounded-3xl p-8 shadow-xl">
+                  <div className="flex items-start space-x-6">
+                    <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-purple-600 rounded-3xl flex items-center justify-center text-white text-2xl  flex-shrink-0">
+                      ZA
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl  text-gray-900 mb-1">Malik Zeeshan Ahmed</h3>
+                      <p className="text-purple-600 font-semibold mb-4">Managing Director</p>
+                      <div className="space-y-4 text-gray-600">
+                        <p>
+                          Zeeshan brings deep operational expertise and a relentless focus on quality and execution. As MD, he
+                          ensures that NGT stays aligned with its core values — integrity, professionalism, and progress.
+                        </p>
+                        <p>
+                          His leadership style is grounded in action: coaching teams, refining delivery, and driving continuous improvement across departments. He led by example — turning challenges into growth and vision into results.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* MD */}
+
           </div>
         </div>
       </section>
 
+
       {/* Operations Model - Timeline Style */}
-      <section ref={operationsRef} id="operations" className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30">
+      {/* <section ref={operationsRef} id="operations" className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center space-x-3 bg-white/70 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
               <Workflow className="h-5 w-5 text-blue-600" />
               <span className="font-medium text-gray-700">How We Operate</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl  text-gray-900 mb-6">
+            <h2 className="text-3xl lg:text-4xl  text-gray-900 mb-6">
               Our <span className="text-blue-600">Delivery Model</span>
             </h2>
           </div>
 
-          {/* Timeline Layout */}
           <div className="relative">
-            {/* Central line */}
             <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-blue-600 to-purple-600 rounded-full"></div>
 
             <div className="space-y-16">
@@ -583,15 +656,12 @@ const InsideNGT = () => {
                 }
               ].map((item, index) => (
                 <div key={index} className={`relative flex ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
-                  {/* Timeline node */}
                   <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full border-4 border-blue-600 z-10"></div>
-                  
-                  {/* Content */}
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-16' : 'pl-16'}`}>
+
+                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-2' : 'pl-2'}`}>
                     <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 relative">
-                      {/* Arrow */}
                       <div className={`absolute top-6 ${index % 2 === 0 ? 'right-0 translate-x-1/2' : 'left-0 -translate-x-1/2'} w-4 h-4 bg-white rotate-45 border-r border-b border-gray-100`}></div>
-                      
+
                       <div className="flex items-start space-x-4">
                         <div className={`w-12 h-12 bg-${item.color}-600 rounded-2xl flex items-center justify-center text-white flex-shrink-0`}>
                           {item.icon}
@@ -608,17 +678,82 @@ const InsideNGT = () => {
             </div>
           </div>
         </div>
+      </section> */}
+
+      <section ref={cultureRef} id="culture" className="py-32 bg-white -mt-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center space-x-3 bg-gray-50 rounded-full px-6 py-3 mb-6">
+              <Heart className="h-5 w-5 text-blue-600" />
+              <span className="font-medium text-gray-700">Culture at NGT</span>
+            </div>
+            <h2 className="text-3xl lg:text-4xl  text-gray-900 mb-6">
+              NGT <span className="text-blue-600">Moments</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              Every picture tells a story. From global conferences to internal celebrations, NGT Moments captures the spirit, energy, and connections that define who we are.
+            </p>
+          </div>
+
+
+
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div className="p-4">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {images.map((src, index) => (
+                  <Image
+                    key={index}
+                    src={src}
+                    alt={`Image ${index + 1}`}
+                    width={500}
+                    height={400}
+                    className="rounded-xl shadow w-full h-52 object-cover cursor-pointer"
+                    onClick={() => openModal(index)}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Modal */}
+            {isOpen && (
+              <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+                <button onClick={closeModal} className="absolute top-5 right-5 text-white text-3xl">&times;</button>
+                <button onClick={prevImage} className="absolute left-5 text-white text-4xl">&#10094;</button>
+
+                <div className={`transition-opacity duration-200 ${fade ? "opacity-100" : "opacity-0"}`}>
+                  <Image
+                    src={images[currentIndex]}
+                    alt={`Large Preview ${currentIndex + 1}`}
+                    width={1200}
+                    height={800}
+                    className="max-h-[80vh] w-auto rounded-xl shadow"
+                  />
+                </div>
+
+                <button onClick={nextImage} className="absolute right-5 text-white text-4xl">&#10095;</button>
+              </div>
+            )}
+          </div>
+
+
+
+
+
+
+        </div>
       </section>
 
       {/* Culture Section - Creative Layout */}
-      <section ref={cultureRef} id="culture" className="py-32 bg-white">
+      <section ref={cultureRef} id="culture" className="py-32 bg-white -mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center space-x-3 bg-gray-50 rounded-full px-6 py-3 mb-6">
               <Heart className="h-5 w-5 text-blue-600" />
               <span className="font-medium text-gray-700">Culture at NGT</span>
             </div>
-            <h2 className="text-4xl lg:text-5xl  text-gray-900 mb-6">
+            <h2 className="text-3xl lg:text-4xl  text-gray-900 mb-6">
               Clarity, Curiosity, and <span className="text-blue-600">Commitment</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
@@ -629,30 +764,52 @@ const InsideNGT = () => {
 
           {/* Circular arrangement */}
           <div className="relative max-w-4xl mx-auto">
-            <div className="relative w-96 h-96 mx-auto">
-              {/* Center element */}
-              <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+            <div className="relative w-[26rem] h-[26rem] mx-auto">
+              {/* Center circle */}
+              <div className="absolute inset-1/2 transform -translate-x-1/2 -translate-y-1/2 w-36 h-36 bg-gradient-to-br from-blue-600 to-purple-600 rounded-full flex items-center justify-center shadow-lg z-10">
                 <div className="text-center text-white">
-                  <Heart className="h-8 w-8 mx-auto mb-2" />
+                  <Heart className="h-8 w-8 mx-auto mb-1" />
                   <p className="text-sm font-semibold">NGT Culture</p>
                 </div>
               </div>
 
-              {/* Culture values positioned around center */}
+              {/* Culture Values with extra spacing from center */}
               {[
-                { icon: <Award className="h-5 w-5" />, title: "Strong Work Ethics", position: "top-0 left-1/2 -translate-x-1/2 -translate-y-1/2" },
-                { icon: <FileText className="h-5 w-5" />, title: "Documented Delivery", position: "top-1/2 right-0 translate-x-1/2 -translate-y-1/2" },
-                { icon: <CheckCircle className="h-5 w-5" />, title: "Clear Handoffs", position: "bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2" },
-                { icon: <TrendingUp className="h-5 w-5" />, title: "Transparent Growth", position: "top-1/2 left-0 -translate-x-1/2 -translate-y-1/2" }
+                {
+                  icon: <Award className="h-5 w-5" />,
+                  title: "Strong Work Ethics",
+                  className: "top-0 left-1/2 -translate-x-1/2", // pushed up
+                },
+                {
+                  icon: <FileText className="h-5 w-5" />,
+                  title: "Documented Delivery",
+                  className: "top-1/2 right-0 -translate-y-1/2", // pushed right
+                },
+                {
+                  icon: <CheckCircle className="h-5 w-5" />,
+                  title: "Clear Handoffs",
+                  className: "bottom-0 left-1/2 -translate-x-1/2", // pushed down
+                },
+                {
+                  icon: <TrendingUp className="h-5 w-5" />,
+                  title: "Transparent Growth",
+                  className: "top-1/2 left-0 -translate-y-1/2", // pushed left
+                },
               ].map((value, index) => (
-                <div key={index} className={`absolute ${value.position} w-24 h-24 bg-white rounded-2xl shadow-lg border border-gray-100 flex flex-col items-center justify-center text-center p-2 group hover:scale-110 transition-transform duration-300`}>
-                  <div className="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-1 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
+                <div
+                  key={index}
+                  className={`absolute ${value.className} w-28 h-28 bg-white rounded-2xl shadow-md border border-gray-100 flex flex-col items-center justify-center text-center p-3 group transition-all duration-300 hover:shadow-xl hover:scale-105`}
+                >
+                  <div className="w-9 h-9 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 mb-2 group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                     {value.icon}
                   </div>
-                  <p className="text-xs font-semibold text-gray-700 leading-tight">{value.title}</p>
+                  <p className="text-xs font-semibold text-gray-700 leading-snug">
+                    {value.title}
+                  </p>
                 </div>
               ))}
             </div>
+
 
             {/* Detailed descriptions below */}
             <div className="grid md:grid-cols-2 gap-8 mt-20">
@@ -702,7 +859,7 @@ const InsideNGT = () => {
       </section>
 
       {/* Locations Section - Map Style */}
-      <section className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30">
+      <section className="py-32 bg-gradient-to-br from-gray-50 to-blue-50/30 -mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <div className="inline-flex items-center space-x-3 bg-white/70 backdrop-blur-sm rounded-full px-6 py-3 mb-6">
@@ -717,8 +874,8 @@ const InsideNGT = () => {
           <div className="relative max-w-4xl mx-auto">
             {/* Simplified world representation */}
             <div className="relative bg-white/40 backdrop-blur-sm rounded-3xl p-16 border border-white/50 overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 to-purple-50/50"></div>
-              
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-blue-50"></div>
+
               {/* Location markers */}
               <div className="relative space-y-12">
                 <div className="flex justify-between items-center">
@@ -731,7 +888,7 @@ const InsideNGT = () => {
                       <p className="text-gray-600">Islamabad</p>
                     </div>
                   </div>
-                  
+
                   <div className="text-center space-y-4">
                     <div className="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                       <Globe className="h-8 w-8 text-white" />
@@ -741,7 +898,7 @@ const InsideNGT = () => {
                       <p className="text-gray-600">Dubai, Riyadh, Dallas</p>
                     </div>
                   </div>
-                  
+
                   <div className="text-center space-y-4">
                     <div className="w-16 h-16 bg-green-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
                       <MapPin className="h-8 w-8 text-white" />
@@ -754,7 +911,7 @@ const InsideNGT = () => {
                 </div>
 
                 {/* Connection lines */}
-                <div className="absolute inset-0 pointer-events-none">
+                {/* <div className="absolute inset-0 pointer-events-none">
                   <svg className="w-full h-full" viewBox="0 0 400 200">
                     <path 
                       d="M100 100 Q200 50 300 100" 
@@ -774,7 +931,7 @@ const InsideNGT = () => {
                       style={{ animationDelay: '0.5s' }}
                     />
                   </svg>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -782,31 +939,31 @@ const InsideNGT = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
           <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
         </div>
-        
+
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="space-y-8">
             <div className="inline-flex items-center space-x-3 bg-white/20 backdrop-blur-sm rounded-full px-6 py-3 shadow-xl">
               <Rocket className="h-6 w-6 text-white" />
               <span className="text-lg font-semibold text-white">Ready to Partner?</span>
             </div>
-            
-            <h2 className="text-4xl lg:text-6xl  text-white leading-tight">
+
+            <h2 className="text-3xl lg:text-4xl  text-white leading-tight">
               Let's Build Something{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
                 Reliable, Scalable, and Human
               </span>
             </h2>
-            
-            <p className="text-xl text-blue-100 leading-relaxed max-w-3xl mx-auto">
+
+            <p className="text-lg text-blue-100 leading-relaxed max-w-3xl mx-auto">
               Whether you're looking for a long-term partner or exploring your next career move — NGT is built to grow
               with you.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center pt-8">
               <button className="group bg-white hover:bg-gray-100 text-blue-600 px-8 py-4 rounded-2xl font-semibold transition-all duration-300 hover:scale-105 shadow-2xl">
                 <div className="flex items-center justify-center">

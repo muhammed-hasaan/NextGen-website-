@@ -327,12 +327,12 @@ const WhereWeFit = () => {
 
 
         {/* CTA Section */}
-        <div className="text-center mt-16">
+        {/* <div className="text-center mt-16">
           <button className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl flex items-center mx-auto">
             Let's Map NGT Into Your Workflow
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
           </button>
-        </div>
+        </div> */}
       </div>
        <style jsx>{`
         .glass-morphism {

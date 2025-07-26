@@ -96,9 +96,13 @@ useEffect(() => {
 
 
 
-          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed -mt-6">
-            How NGT Transforms Operations
-          </p>
+          {/* <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed -mt-6">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto px-4 -mt-2">
+        Experience <span className="text-[#0c5de2] font-semibold">Niblo</span> — NGT's revolutionary AI platform that transforms customer operations through intelligent automation.
+      </p>
+          </p> */}
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto px-4 -mt-2">
+Across industries and regions, growing companies partner with NGT to turn broken customer processes into smooth, scalable operations. Here’s what that transformation looks like.      </p>
 
           <div className="w-32 h-2 bg-[#2563EB] mx-auto rounded-full mt-4"></div>
         </div>
